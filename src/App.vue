@@ -1,13 +1,17 @@
 <script setup lang="ts">
-  import {  ref } from 'vue';
-  const counter = ref<number>(0);
+  import { RouterView } from 'vue-router';
+  import NavBar from '@/shared/components/NavBar.vue';
+
 </script>
 
 <template>
   <div class="wrapper">
-    <h1>Counter: {{counter}}</h1>
-    <button @click="counter++">+1</button>
-    <p>Mundo</p>
+    <header>
+      <NavBar></NavBar>
+    </header>
+    <main>
+    <RouterView/>
+    </main>
   </div>
 </template>
 
