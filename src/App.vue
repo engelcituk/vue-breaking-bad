@@ -7,7 +7,10 @@
 <template>
   <div class="wrapper">
     <header>
-      <NavBar></NavBar>
+      <NavBar
+        title="BreakingBad"
+        links=""
+      />
     </header>
     <main>
     <RouterView/>
