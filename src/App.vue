@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router';
   import NavBar from '@/shared/components/NavBar.vue';
+import { routeLinks } from './router/link-routes';
 
 </script>
 
@@ -9,7 +10,7 @@
     <header>
       <NavBar
         title="BreakingBad"
-        links=""
+        :links="routeLinks"
       />
     </header>
     <main>
