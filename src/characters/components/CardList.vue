@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import breakingBadApi from '@/api/breakingBadApi';
+import type { MarvelCharacter } from '@/characters/interfaces/character';
 
-breakingBadApi.get('/characters')
+breakingBadApi.get<MarvelCharacter>('/characters')
     .then( resp => {
-        console.log({data: resp.data});
-    })
+        console.log(resp.data.data.results[0]);
+    });
 </script>
 
 <template>
