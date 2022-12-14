@@ -25,9 +25,11 @@ const routeLinks: RouterLink[] = characterRoute.children!
         :show-icon="false"
         :links="routeLinks"
     />
-    <Suspense>
+    <!-- <Suspense>
         <RouterView/>
-    </Suspense>
+    </Suspense> -->
+    <RouterView/>
+
 
 
 </template>

@@ -1,19 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import breakingBadApi from '@/api/breakingBadApi';
-import type { MarvelCharacter, Character} from '@/characters/interfaces/character'
+import { useCharacters } from '@/characters/composables/useCharacters';
 
-const {data} = await breakingBadApi.get<MarvelCharacter>('/characters')
-const characters = data.data.results
-
+const { characters, isLoading} = useCharacters()
 /*
-breakingBadApi.get<MarvelCharacter>('/characters')
-    .then( resp => {
-        characters.value = resp.data.data.results
-    });*/
+const {data} = await breakingBadApi.get<MarvelCharacter>('/characters')
+const characters = data.data.results*/
+
+
 </script>
 
 <template>
+    <h1 v-if="isLoading">Loading..</h1>
     <ul>
         <li
             v-for="character of characters"
