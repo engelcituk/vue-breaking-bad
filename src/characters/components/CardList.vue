@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useCharacters } from '@/characters/composables/useCharacters';
 
-const { characters, isLoading} = useCharacters()
+const { characters, isLoading, hasError, errorMessage } = useCharacters()
 /*
 const {data} = await breakingBadApi.get<MarvelCharacter>('/characters')
 const characters = data.data.results*/
@@ -11,6 +11,8 @@ const characters = data.data.results*/
 
 <template>
     <h1 v-if="isLoading">Loading..</h1>
+    <h1 v-if="hasError">{{errorMessage}}</h1>
+
     <ul>
         <li
             v-for="character of characters"
