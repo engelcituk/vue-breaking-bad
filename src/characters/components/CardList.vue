@@ -29,10 +29,10 @@ const getCharactersSlow = async ():Promise<Character[]> => {
 const {isLoading, isError, data:characters, error } = useQuery(
     ['characters'],
     getCharactersSlow,
-    {
-        cacheTime: 1000 * 60,
-        refetchOnReconnect: 'always' //petición cuando se conecte a internet
-    }
+    // {
+    //     cacheTime: 1000 * 60,
+    //     refetchOnReconnect: 'always' //petición cuando se conecte a internet
+    // }
 )
 
 </script>
