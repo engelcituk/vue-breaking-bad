@@ -1,14 +1,12 @@
 import { ref, onMounted } from 'vue';
 import breakingBadApi from '@/api/breakingBadApi';
-import type { MarvelCharacter, Character} from '@/characters/interfaces/character'
+import type { MortyCharacter, Character} from '@/characters/interfaces/character'
 import axios from 'axios';
 
 const characters = ref<Character[]>([])
 const isLoading = ref<boolean>(true)
 const hasError = ref<boolean>(true)
 const errorMessage = ref<string>()
-
-
 
 export const useCharacters = () => {
 
@@ -22,8 +20,8 @@ export const useCharacters = () => {
         isLoading.value = true
 
         try {
-            const { data } = await breakingBadApi.get<MarvelCharacter>('/characters')    
-            characters.value = data.data.results
+            const { data } = await breakingBadApi.get<MortyCharacter>('/character')    
+            characters.value = data.results
             isLoading.value = false
         } catch (error) {
             hasError.value = true
@@ -36,8 +34,6 @@ export const useCharacters = () => {
         }
             
     }
-
-  
 
     return {
         characters,
