@@ -6,13 +6,14 @@ import { toRef } from 'vue';
 //     character: Character
 // }
 
-const props = defineProps<{character: Character}>() //no desestructurar props ya que perdaría la reactividad
-const character = toRef(props, 'character')
+const props = defineProps<{character: Character}>() //no desestructurar props ya que perdería la reactividad
+const character = toRef(props, 'character') //una referencia al prop
 
 </script>
 
 <template>
     <div class="character-card">
+        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt=""> -->
         <img :src="character.image" :alt="character.name">
         <h3>{{character.name}}</h3>
     </div>
