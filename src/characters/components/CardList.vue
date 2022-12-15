@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import breakingBadApi from '@/api/breakingBadApi';
-import { useCharacters } from '@/characters/composables/useCharacters';
-import {  useQuery } from "@tanstack/vue-query";
-import type { MortyCharacter, Character } from '../interfaces/character';
+import CharacterCard from '@/characters/components/CharacterCard.vue'
+
+import breakingBadApi from '@/api/breakingBadApi'
+import { useCharacters } from '@/characters/composables/useCharacters'
+import {  useQuery } from "@tanstack/vue-query"
+import type { MortyCharacter, Character } from '@/characters/interfaces/character'
+
 
 /*
 const {data} = await breakingBadApi.get<MarvelCharacter>('/characters')
@@ -18,7 +21,7 @@ const getCharactersSlow = async ():Promise<Character[]> => {
         setTimeout( async () => {
             const data = await breakingBadApi.get<MortyCharacter>('/character'); 
             resolve( data.data.results)
-        }, 3000)
+        }, 1)
     })
     
 }
@@ -36,19 +39,25 @@ const {isLoading, isError, data:characters, error } = useQuery(
 
 <template>
     <h1 v-if="isLoading">Loading..</h1>
-    <h1 v-if="isError">{{error}}</h1>
-
-    <ul>
-        <li
-            v-for="character of characters"
-            :key="character.id"
-        >
-        {{character.name}}
-        </li>
-    </ul>
+    <!-- <h1 v-if="isError">{{error}}</h1> -->
+    <div class="card-list">
+        
+            <CharacterCard 
+                v-for="character of characters"
+                :key="character.id"
+                :character="character"
+            >
+            {{character.name}}
+            </CharacterCard>
+       
+    </div>
 </template>
 
 
 <style scoped>
-
+.card-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 </style>
