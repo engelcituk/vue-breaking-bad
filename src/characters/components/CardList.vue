@@ -14,13 +14,22 @@ const characters = data.data.results*/
 // tanStack
 
 const getCharactersSlow = async ():Promise<Character[]> => {
-    const data = await breakingBadApi.get<MortyCharacter>('/character'); 
-    return data.data.results
+    return new Promise( (resolve) => {
+        setTimeout( async () => {
+            const data = await breakingBadApi.get<MortyCharacter>('/character'); 
+            resolve( data.data.results)
+        }, 3000)
+    })
+    
 }
 
 const {isLoading, isError, data:characters, error } = useQuery(
     ['characters'],
-    getCharactersSlow
+    getCharactersSlow,
+    {
+        cacheTime: 1000 * 60,
+        refetchOnReconnect: 'always' //petición cuando se conecte a internet
+    }
 )
 
 </script>
