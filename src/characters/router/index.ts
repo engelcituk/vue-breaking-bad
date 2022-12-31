@@ -6,26 +6,28 @@ import CharacterList from '@/characters/pages/CharacterList.vue';
 import CharacterSearch from '@/characters/pages/CharacterSearch.vue';
 
 
+const ROUTE_NAME = 'characters';
+
 export const characterRoute: RouteRecordRaw = {
-    path: '/characters',
-    redirect: '/characters/list',
+    path: `/${ROUTE_NAME}`,
+    redirect: `/${ROUTE_NAME}/list`,
     component: CharacterLayout,
     children:[
         {
             path:'by/:id',
-            name: 'characcter-id',
+            name: 'character-id',
             component: CharacterId,
             props: {title:'Por id', visible: false}
         },
         {
-            path:'list',
-            name: 'characcter-list',
+            path:`/${ROUTE_NAME}/list`,
+            name: 'character-list',
             component: CharacterList,
-            props: {title:'Lista', visible: true}
+            props: { title:'Lista', visible: true}
         },
         {
-            path:'search',
-            name: 'characcter-search',
+            path:`/${ROUTE_NAME}/search`,
+            name: 'character-search',
             component: CharacterSearch,
             props: { title:'Búsqueda', visible: true}
 
