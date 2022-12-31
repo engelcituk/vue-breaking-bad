@@ -8,16 +8,21 @@ import type { Character, MortyCharacter } from '@/characters/interfaces/characte
 
 const props = defineProps<{title:string, visible:boolean}>()
 
-// const getCharacters = async ():Promise<Character[]> => {
-//     const data = await breakingBadApi.get<MortyCharacter>('/character'); 
-//     return data.data.results
+const getCharacters = async ():Promise<Character[]> => {
+    const data = await breakingBadApi.get<MortyCharacter>('/character'); 
+    return data.data.results
 
-// }
+}
 
-// const {isLoading, data:characters } = useQuery(
-//     ['characters'],
-//     getCharacters
-// )
+const { isLoading, data } = useQuery(
+    ['characters'],
+    getCharacters,
+    {
+        onSuccess( data ){
+            characterStore.loadedCharacters(data)
+        }
+    }
+)
 
 
  </script>
