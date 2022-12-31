@@ -8,15 +8,18 @@ import type { Character, MortyCharacter } from '@/characters/interfaces/characte
 
 const props = defineProps<{title:string, visible:boolean}>()
 
-const getCharacters = async ():Promise<Character[]> => {
+const getCharactersCacheFirst = async ():Promise<Character[]> => {
+    if(characterStore.characters.count > 0) {
+        return characterStore.characters.list
+    }
     const data = await breakingBadApi.get<MortyCharacter>('/character'); 
     return data.data.results
 
 }
 
-const { isLoading, data } = useQuery(
+useQuery(
     ['characters'],
-    getCharacters,
+    getCharactersCacheFirst,
     {
         onSuccess( data ){
             characterStore.loadedCharacters(data)

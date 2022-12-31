@@ -1,4 +1,6 @@
-import type { Character } from "@/characters/interfaces/character"
+import breakingBadApi from '@/api/breakingBadApi'
+import type { Character, MortyCharacter } from '@/characters/interfaces/character';
+
 import { reactive }  from 'vue'
 interface Store {
     characters: {
@@ -25,8 +27,10 @@ const characterStore = reactive<Store>({
         list: [],
     },
     //methods
-    startLoadingCharacters(){
-        console.log("start loading characters")
+    async startLoadingCharacters(){
+        // console.log("start loading characters")
+        const data = await breakingBadApi.get<MortyCharacter>('/character')
+        this.loadedCharacters(data.data.results)
     },
     loadedCharacters(data: Character[]){
         this.characters = {
