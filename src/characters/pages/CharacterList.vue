@@ -32,10 +32,17 @@ useQuery(
 
 <template>
     <h1 v-if="characterStore.characters.isLoading">Loading..</h1>
+
+    <div v-else-if="characterStore.characters.hasError">
+        <h1>Error al cargar</h1>
+        <p>{{ characterStore.characters.errorMessage }}</p>
+    </div>
+
     <template v-else>
         <h2>{{props.title}}</h2>
         <CardList :characters="characterStore.characters.list || []"/>
     </template>
+    
 </template>
 
 
