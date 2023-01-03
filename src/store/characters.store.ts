@@ -47,7 +47,7 @@ const characterStore = reactive<Store>({
         hasError: false,
         isLoading: true,
     },
-    //methods
+    //methods de Characters
     async startLoadingCharacters(){
         // console.log("start loading characters")
         const data = await breakingBadApi.get<MortyCharacter>('/character')
@@ -71,6 +71,22 @@ const characterStore = reactive<Store>({
             isLoading: false,
             list: [],
         }
+    },
+    // methodos de Character by IDs
+    startLoadingCharacter(){
+        this.ids = {
+            ...this.ids,
+            isLoading: true,
+            hasError: false,
+            errorMessage: null
+        }
+    },
+    checkIdInStore( id:string ){
+        return !!this.ids.list[id] //true doble negación
+    },
+    loadedCharacter( character: Character){
+        this.ids.isLoading = false
+        this.ids.list[character.id] = character
     }
 
 })
