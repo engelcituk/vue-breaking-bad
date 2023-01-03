@@ -18,7 +18,7 @@ const getCharacterCacheFirst = async( characterId: string):Promise<Character> =>
 
 }
 
-const {data} = useQuery(
+const {data: character} = useQuery(
     ['characters', id],
     () => getCharacterCacheFirst(id),
     {
@@ -30,13 +30,32 @@ const {data} = useQuery(
 </script>
 
 <template>
-    <div>
-        <h1>Character {{id}}</h1>
-        <pre>{{ data }}</pre>
-    </div>
+        <h1 v-if="!character">Loading</h1>
+        <div v-else>
+            <h1> {{character.name}}</h1>     
+            <div class="character-container">
+                <img :src="character.image" :alt="character.name">
+                <ul>
+                    <li>Especie: {{ character.species }}</li>
+                    <li>Tipo: {{ character.type }}</li>
+                    <li>Género: {{ character.gender }}</li>
+                    <li>Status: {{ character.status }}</li>
+
+                </ul> 
+            </div> 
+            <pre>
+            {{ character }}</pre>     
+        </div>
 </template>
 
 
-<style lang="scss" scoped>
-
+<style  scoped>
+.character-container{
+    display: flex;
+    flex-direction: row;
+}
+img {
+    width: 150px;
+    border-radius: 5px;
+}
 </style>
