@@ -42,9 +42,7 @@ const {data: character} = useQuery(
                     <li>Status: {{ character.status }}</li>
 
                 </ul> 
-            </div> 
-            <pre>
-            {{ character }}</pre>     
+            </div>                 
         </div>
 </template>
 
