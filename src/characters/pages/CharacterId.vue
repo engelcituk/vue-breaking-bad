@@ -9,7 +9,7 @@ const { id } = route.params as {id: string}
 
 <template>
     <div>
-        <h1>Character {id}</h1>
+        <h1>Character {{id}}</h1>
     </div>
 </template>
 
