@@ -5,15 +5,15 @@ import useCharacter from '@/characters/composables/useCharacter'
 const route = useRoute()
 
 const { id } = route.params as {id: string}
-const { hasError, errorMessage, character } = useCharacter(id)
+const { hasError, errorMessage, character, isLoading} = useCharacter(id)
 
 </script>
 
 <template>
-        <h1 v-if="!character">Loading</h1>
+        <h1 v-if="isLoading">Loading</h1>
         <h1 v-else-if="hasError">{{errorMessage}}</h1>
 
-        <div v-else>
+        <div v-else-if="character">
             <h1> {{character.name}}</h1>     
             <div class="character-container">
                 <img :src="character.image" :alt="character.name">

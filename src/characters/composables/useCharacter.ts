@@ -13,15 +13,24 @@ const getCharacter = async( id: string):Promise<Character> =>{
     if( characterSet.value[id] ){
         return characterSet.value[id]
     }
-    const data = await breakingBadApi.get<Character>(`/character/${id}`)
-    //TOOD: manejar error
-    return data.data
+
+    try {
+        const data = await breakingBadApi.get<Character>(`/character/${id}`)
+        return data.data
+    } catch (error: any ) {
+        throw new Error(error)
+    }
 }
 
 const loadedCharacter = (character: Character) => {
     hasError.value = false
     errorMessage.value = null
     characterSet.value[character.id] = character
+}
+
+const loadedWithError = (error:string) => {
+    hasError.value = true
+    errorMessage.value = error
 }
 
 const useCharacter = (id:string) => {
@@ -32,6 +41,9 @@ const useCharacter = (id:string) => {
         {
             onSuccess( character ){
                 loadedCharacter(character)
+            },
+            onError( error: string ){
+                loadedWithError(error)
             }
         }
     )
