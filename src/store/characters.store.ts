@@ -1,7 +1,7 @@
+import { reactive }  from 'vue'
 import breakingBadApi from '@/api/breakingBadApi'
 import type { Character, MortyCharacter } from '@/characters/interfaces/character';
 
-import { reactive }  from 'vue'
 interface Store {
     characters: {
         list: Character[];
