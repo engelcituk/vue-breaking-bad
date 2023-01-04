@@ -44,6 +44,8 @@ const useCharacter = (id:string) => {
         list: characterSet,
 
         //getters
+        //puede venir nulo en un determinado tiempo
+        character: computed<Character | null >( ()=> characterSet.value[id]) 
 
         //methods
     }

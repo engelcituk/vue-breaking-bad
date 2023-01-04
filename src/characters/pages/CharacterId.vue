@@ -1,36 +1,18 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { useQuery } from '@tanstack/vue-query'
-import type { Character, MortyCharacter } from '@/characters/interfaces/character'
-import characterStore from '@/store/characters.store'
-import breakingBadApi from '@/api/breakingBadApi'
+import useCharacter from '@/characters/composables/useCharacter'
 
 const route = useRoute()
 
 const { id } = route.params as {id: string}
+const { hasError, errorMessage, character } = useCharacter(id)
 
-const getCharacterCacheFirst = async( characterId: string):Promise<Character> =>{
-    if(characterStore.checkIdInStore(characterId)){
-        return characterStore.ids.list[characterId]
-    }
-    const data = await breakingBadApi.get<Character>(`/character/${characterId}`)
-    return data.data
-
-}
-
-const {data: character} = useQuery(
-    ['characters', id],
-    () => getCharacterCacheFirst(id),
-    {
-        onSuccess( character ){
-            characterStore.loadedCharacter(character)
-        }
-    }
-)
 </script>
 
 <template>
         <h1 v-if="!character">Loading</h1>
+        <h1 v-else-if="hasError">{{errorMessage}}</h1>
+
         <div v-else>
             <h1> {{character.name}}</h1>     
             <div class="character-container">
