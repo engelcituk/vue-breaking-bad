@@ -4,13 +4,9 @@ import CardList from '@/characters/components/CardList.vue';
 import useCharacters from '@/characters/composables/useCharacters';
 
 const props = defineProps<{title:string, visible:boolean}>()
-const {isLoading, hasError, errorMessage, characters, count} = useCharacters()
+const { isLoading, hasError, errorMessage, characters, count} = useCharacters()
 
-
-
-
-
- </script>
+</script>
 
 <template>
     <h1 v-if="isLoading">Loading..</h1>
